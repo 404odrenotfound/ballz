@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>obri (edited)</title>
+    <style>
+        body {
+            margin: 0;
+            background: url('https://i.pinimg.com/originals/41/cd/7f/41cd7f09554c7c7a1d0f7278a88ef724.gif') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #canvas {
+            border: 1px solid whitesmoke;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Bouncing Ball sheees</h1>
+    <canvas id="canvas" width="1500%" height="740%"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const balls = [
+            {
+                x: canvas.width / 3,
+                y: canvas.height / 2,
+                radius: 20,
+                velocityX: 5,
+                velocityY: 5,
+                color: 'blue',
+            },
+            {
+                x: (canvas.width / 3) * 2,
+                y: canvas.height / 2,
+                radius: 20,
+                velocityX: -5,
+                velocityY: -5,
+                color: 'red',
+            },
+            {
+                x: canvas.width / 2,
+                y: canvas.height / 3,
+                radius: 20,
+                velocityX: 3,
+                velocityY: -4,
+                color: 'green',
+            },
+            // Add more balls below
+            {
+                x: canvas.width / 4,
+                y: canvas.height / 4,
+                radius: 20,
+                velocityX: 4,
+                velocityY: -3,
+                color: 'yellow',
+            },
+            {
+                x: (canvas.width / 4) * 3,
+                y: canvas.height / 4,
+                radius: 20,
+                velocityX: -3,
+                velocityY: 4,
+                color: 'orange',
+            },
+             // Adding more balls
+             {
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                radius: 20,
+                velocityX: 2,
+                velocityY: -2,
+                color: 'purple',
+            },
+            {
+                x: canvas.width / 5,
+                y: canvas.height / 5,
+                radius: 20,
+                velocityX: 3,
+                velocityY: 4,
+                color: 'pink',
+            },
+            {
+                x: (canvas.width / 5) * 4,
+                y: canvas.height / 5,
+                radius: 20,
+                velocityX: -4,
+                velocityY: 3,
+                color: 'cyan',
+            },
+             // Adding more balls
+             {
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                radius: 20,
+                velocityX: 2,
+                velocityY: -2,
+                color: 'black',
+            },
+            {
+                x: canvas.width / 5,
+                y: canvas.height / 5,
+                radius: 20,
+                velocityX: 3,
+                velocityY: 4,
+                color: 'magenta',
+            },
+            {
+                x: (canvas.width / 5) * 4,
+                y: canvas.height / 5,
+                radius: 20,
+                velocityX: -4,
+                velocityY: 3,
+                color: 'gray',
+            },
+              // Adding more balls
+            {
+                x: canvas.width / 5,
+                y: canvas.height / 5,
+                radius: 20,
+                velocityX: 3,
+                velocityY: 4,
+                color: 'brown',
+            },
+            {
+                x: canvas.width / 5,
+                y: canvas.height / 5,
+                radius: 20,
+                velocityX: 3,
+                velocityY: 4,
+                color: 'indigo',
+            },
+            
+        ];
+
+        function drawBall(ball) {
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = ball.color;
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        function moveBall(ball) {
+            ball.x += ball.velocityX;
+            ball.y += ball.velocityY;
+        }
+
+        function bounceBall(ball) {
+            if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+                ball.velocityY = -ball.velocityY;
+            }
+
+            if (ball.x - ball.radius < 0 || ball.x + ball.radius > canvas.width) {
+                ball.velocityX = -ball.velocityX;
+            }
+        }
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function update() {
+            clearCanvas();
+
+            balls.forEach((ball) => {
+                moveBall(ball);
+                bounceBall(ball);
+                drawBall(ball);
+            });
+
+            requestAnimationFrame(update);
+        }
+
+        update();
+    </script>
+</body>
+</html>
